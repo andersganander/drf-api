@@ -31,14 +31,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v=69gfs!l)a%$jr01_kc&+k3o7+un%%782bby-)9ijmf123g$8'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = 'DEV' in os.environ
 
 CSRF_TRUSTED_ORIGINS = ['https://*.ws.codeinstitute-ide.net/']
 
-ALLOWED_HOSTS = ['8000-andersganander-drfapi-1m9rmz7a3h3.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-andersganander-drfapi-1m9rmz7a3h3.ws.codeinstitute-ide.net', 
+                 'https://ag-drf-api-69137997df7c.herokuapp.com/']
 
 
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'corsheaders',
 
     'profiles',
     'posts',
@@ -98,6 +100,7 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'}
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -106,6 +109,19 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
+else:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.gitpod\.io$",
+    ]
+
+CORS_ALLOW_CREDENTIALS = True
+
+JWT_AUTH_SAMESITE = 'None'
 
 ROOT_URLCONF = 'drf_api.urls'
 
