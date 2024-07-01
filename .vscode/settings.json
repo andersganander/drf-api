@@ -15,4 +15,16 @@
    "files.autoSave": "off",
    "workbench.colorTheme": "Visual Studio Dark",
    "terminal.integrated.gpuAcceleration": "canvas",
+   "sqltools.connections": [
+      {
+         "pgOptions": {
+            "ssl": true
+         },
+         "previewLimit": 50,
+         "server": "localhost",
+         "driver": "PostgreSQL",
+         "name": "drf-api-db",
+         "connectString": "postgres://uvym4bbbkmq:4LSew5YltdJi@ep-gentle-mountain-a23bxz6h.eu-central-1.aws.neon.tech/flint_sax_basil_801777"
+      }
+   ],
 }
