@@ -43,7 +43,7 @@ CSRF_TRUSTED_ORIGINS = ['https://*.ws.codeinstitute-ide.net/']
 #                   'ag-drf-api-69137997df7c.herokuapp.com']
 
 ALLOWED_HOSTS = [
-   os.environ.get('ALLOWED_HOST'),
+   os.environ.get('ALLOWED_HOSTS'),
    '8000-andersganander-drfapi-1m9rmz7a3h3.ws.codeinstitute-ide.net',
 ]
 
